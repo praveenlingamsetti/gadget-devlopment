@@ -1,0 +1,1 @@
+{"version":3,"sources":["/app/packages/framework/src/remix/constants.ts"],"sourceRoot":"/app","sourcesContent":["export const BuildDirectory = \".gadget/remix-dist/build\";\nexport const AppDirectory = \"web\";\n"],"names":["AppDirectory","BuildDirectory"],"mappings":";;;;;;;;;;;IACaA,YAAY;eAAZA;;IADAC,cAAc;eAAdA;;;AAAN,MAAMA,iBAAiB;AACvB,MAAMD,eAAe"}
