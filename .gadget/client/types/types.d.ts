@@ -77,8 +77,10 @@ export type InternalShopifyOrderLineItemRecord = Scalars["JSONObject"];
 export type InternalShopifySyncRecord = Scalars["JSONObject"];
 /** Represents one draftedProduct result record in internal api calls. Returns a JSON blob of all the record's fields. */
 export type InternalDraftedProductRecord = Scalars["JSONObject"];
-export type BackgroundActionResult = AvailableInventoryUpdateInventoryToZeroResultSelection | AvailableOrderReadOrderLineItemsResultSelection | AvailableProductGetVariantsByproductResultSelection | AvailableProductReadMetafieldByProductResultSelection | AvailableProductReadProductBySwatchIdResultSelection | AvailableProductUpdateProductStatusResultSelection | AvailableAbortShopifySyncResultSelection | AvailableCompleteShopifySyncResultSelection | AvailableErrorShopifySyncResultSelection | AvailableRunShopifySyncResultSelection | AvailableCreateDraftedProductResultSelection | AvailableUpdateDraftedProductResultSelection | AvailableDeleteDraftedProductResultSelection;
-export type AvailableBackgroundActionResultSelection = InventoryUpdateInventoryToZeroResult | OrderReadOrderLineItemsResult | ProductGetVariantsByproductResult | ProductReadMetafieldByProductResult | ProductReadProductBySwatchIdResult | ProductUpdateProductStatusResult | AbortShopifySyncResult | CompleteShopifySyncResult | ErrorShopifySyncResult | RunShopifySyncResult | CreateDraftedProductResult | UpdateDraftedProductResult | DeleteDraftedProductResult;
+/** Represents one gadgetInfo result record in internal api calls. Returns a JSON blob of all the record's fields. */
+export type InternalGadgetInfoRecord = Scalars["JSONObject"];
+export type BackgroundActionResult = AvailableInventoryUpdateInventoryToZeroResultSelection | AvailableOrderReadOrderLineItemsResultSelection | AvailableProductGetVariantsByproductResultSelection | AvailableProductReadMetafieldByProductResultSelection | AvailableProductReadProductBySwatchIdResultSelection | AvailableProductUpdateProductStatusResultSelection | AvailableAbortShopifySyncResultSelection | AvailableCompleteShopifySyncResultSelection | AvailableErrorShopifySyncResultSelection | AvailableRunShopifySyncResultSelection | AvailableCreateDraftedProductResultSelection | AvailableUpdateDraftedProductResultSelection | AvailableDeleteDraftedProductResultSelection | AvailableCreateGadgetInfoResultSelection | AvailableUpdateGadgetInfoResultSelection | AvailableDeleteGadgetInfoResultSelection;
+export type AvailableBackgroundActionResultSelection = InventoryUpdateInventoryToZeroResult | OrderReadOrderLineItemsResult | ProductGetVariantsByproductResult | ProductReadMetafieldByProductResult | ProductReadProductBySwatchIdResult | ProductUpdateProductStatusResult | AbortShopifySyncResult | CompleteShopifySyncResult | ErrorShopifySyncResult | RunShopifySyncResult | CreateDraftedProductResult | UpdateDraftedProductResult | DeleteDraftedProductResult | CreateGadgetInfoResult | UpdateGadgetInfoResult | DeleteGadgetInfoResult;
 export type ShopifyOrderLineItemSort = {
     /** Sort the results by the id field. Defaults to ascending (smallest value first). */
     id?: SortOrder | null;
@@ -1765,6 +1767,25 @@ export type DraftedProductFilter = {
     type?: StringFilter | null;
     variant?: StringFilter | null;
 };
+export type GadgetInfoSort = {
+    /** Sort the results by the id field. Defaults to ascending (smallest value first). */
+    id?: SortOrder | null;
+    /** Sort the results by the createdAt field. Defaults to ascending (smallest value first). */
+    createdAt?: SortOrder | null;
+    /** Sort the results by the updatedAt field. Defaults to ascending (smallest value first). */
+    updatedAt?: SortOrder | null;
+    /** Sort the results by the syncStatus field. Defaults to ascending (smallest value first). */
+    syncStatus?: SortOrder | null;
+};
+export type GadgetInfoFilter = {
+    AND?: (GadgetInfoFilter | null)[];
+    OR?: (GadgetInfoFilter | null)[];
+    NOT?: (GadgetInfoFilter | null)[];
+    id?: IDFilter | null;
+    createdAt?: DateTimeFilter | null;
+    updatedAt?: DateTimeFilter | null;
+    syncStatus?: StringFilter | null;
+};
 export type AbortShopifySyncInput = {
     errorMessage?: (Scalars['String'] | null) | null;
     shop?: ShopifyShopBelongsToInput | null;
@@ -1879,6 +1900,28 @@ export type BulkUpsertDraftedProductsInput = {
     /** An array of Strings */
     on?: ((Scalars['String'] | null))[];
     draftedProduct?: UpsertDraftedProductInput | null;
+};
+export type CreateGadgetInfoInput = {
+    syncStatus?: (Scalars['String'] | null) | null;
+};
+export type BulkCreateGadgetInfosInput = {
+    gadgetInfo?: CreateGadgetInfoInput | null;
+};
+export type UpdateGadgetInfoInput = {
+    syncStatus?: (Scalars['String'] | null) | null;
+};
+export type BulkUpdateGadgetInfosInput = {
+    gadgetInfo?: UpdateGadgetInfoInput | null;
+    id: (Scalars['GadgetID'] | null);
+};
+export type UpsertGadgetInfoInput = {
+    id?: (Scalars['GadgetID'] | null) | null;
+    syncStatus?: (Scalars['String'] | null) | null;
+};
+export type BulkUpsertGadgetInfosInput = {
+    /** An array of Strings */
+    on?: ((Scalars['String'] | null))[];
+    gadgetInfo?: UpsertGadgetInfoInput | null;
 };
 export type EnqueueBackgroundActionOptions = {
     /** A fixed ID to assign to this background action. If not passed, a random ID will be generated and assigned. */
@@ -2330,6 +2373,14 @@ export type InternalDraftedProductInput = {
     swatchId?: (Scalars['String'] | null) | null;
     type?: (Scalars['String'] | null) | null;
     variant?: (Scalars['String'] | null) | null;
+};
+export type InternalGadgetInfoInput = {
+    state?: (Scalars['RecordState'] | null) | null;
+    stateHistory?: (Scalars['RecordState'] | null) | null;
+    id?: (Scalars['GadgetID'] | null) | null;
+    createdAt?: Date | Scalars['ISO8601DateString'] | null;
+    updatedAt?: Date | Scalars['ISO8601DateString'] | null;
+    syncStatus?: (Scalars['String'] | null) | null;
 };
 /** All built-in and custom scalars, mapped to their actual values */
 export interface Scalars {
@@ -2917,7 +2968,7 @@ export type AvailableGadgetGenericFieldValidationSelection = {
     name?: boolean | null | undefined;
     specID?: boolean | null | undefined;
 };
-export interface UpsertError extends UpsertShopifyShopResult, UpsertShopifyGdprRequestResult, UpsertShopifyProductResult, UpsertShopifyProductVariantResult, UpsertShopifyInventoryItemResult, UpsertShopifyLocationResult, UpsertShopifyInventoryLevelResult, UpsertShopifyOrderResult, UpsertShopifyOrderLineItemResult, UpsertShopifySyncResult, UpsertDraftedProductResult {
+export interface UpsertError extends UpsertShopifyShopResult, UpsertShopifyGdprRequestResult, UpsertShopifyProductResult, UpsertShopifyProductVariantResult, UpsertShopifyInventoryItemResult, UpsertShopifyLocationResult, UpsertShopifyInventoryLevelResult, UpsertShopifyOrderResult, UpsertShopifyOrderLineItemResult, UpsertShopifySyncResult, UpsertDraftedProductResult, UpsertGadgetInfoResult {
     __typename: 'UpsertError';
     success: Scalars['Boolean'];
     errors: ExecutionError[];
@@ -3061,6 +3112,18 @@ export type AvailableUpsertDraftedProductResultSelection = {
     errors?: AvailableExecutionErrorSelection;
     actionRun?: boolean | null | undefined;
 };
+export type UpsertGadgetInfoResult = {
+    __typename: 'UpsertError' | 'CreateGadgetInfoResult' | 'UpdateGadgetInfoResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+    actionRun: (Scalars['String'] | null);
+};
+export type AvailableUpsertGadgetInfoResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+    actionRun?: boolean | null | undefined;
+};
 export type Query = {
     __typename: 'Query';
     session: (Session | null);
@@ -3087,6 +3150,8 @@ export type Query = {
     shopifySyncs: ShopifySyncConnection;
     draftedProduct: (DraftedProduct | null);
     draftedProducts: DraftedProductConnection;
+    gadgetInfo: (GadgetInfo | null);
+    gadgetInfos: GadgetInfoConnection;
     currentSession: (Session | null);
     shopifyConnection: Shopify;
     internal: InternalQueries;
@@ -3117,6 +3182,8 @@ export type AvailableQuerySelection = {
     shopifySyncs?: AvailableShopifySyncConnectionSelection;
     draftedProduct?: AvailableDraftedProductSelection;
     draftedProducts?: AvailableDraftedProductConnectionSelection;
+    gadgetInfo?: AvailableGadgetInfoSelection;
+    gadgetInfos?: AvailableGadgetInfoConnectionSelection;
     currentSession?: AvailableSessionSelection;
     shopifyConnection?: AvailableShopifySelection;
     internal?: AvailableInternalQueriesSelection;
@@ -4411,6 +4478,60 @@ export type AvailableDraftedProductEdgeSelection = {
     /** A cursor for use in pagination */
     cursor?: boolean | null | undefined;
 };
+export type GadgetInfo = {
+    __typename: 'GadgetInfo';
+    /** The globally unique, unchanging identifier for this record. Assigned and managed by Gadget. */
+    id: Scalars['GadgetID'];
+    /** The time at which this record was first created. Set once upon record creation and never changed. Managed by Gadget. */
+    createdAt: Scalars['DateTime'];
+    /** The time at which this record was last changed. Set each time the record is successfully acted upon by an action. Managed by Gadget. */
+    updatedAt: Scalars['DateTime'];
+    syncStatus: (Scalars['String'] | null);
+    /** Get all the fields for this record. Useful for not having to list out all the fields you want to retrieve, but slower. */
+    _all: Scalars['JSONObject'];
+};
+export type AvailableGadgetInfoSelection = {
+    __typename?: boolean | null | undefined;
+    /** The globally unique, unchanging identifier for this record. Assigned and managed by Gadget. */
+    id?: boolean | null | undefined;
+    /** The time at which this record was first created. Set once upon record creation and never changed. Managed by Gadget. */
+    createdAt?: boolean | null | undefined;
+    /** The time at which this record was last changed. Set each time the record is successfully acted upon by an action. Managed by Gadget. */
+    updatedAt?: boolean | null | undefined;
+    syncStatus?: boolean | null | undefined;
+    /** Get all the fields for this record. Useful for not having to list out all the fields you want to retrieve, but slower. */
+    _all?: boolean | null | undefined;
+};
+/** A connection to a list of GadgetInfo items. */
+export type GadgetInfoConnection = {
+    __typename: 'GadgetInfoConnection';
+    /** A list of edges. */
+    edges: GadgetInfoEdge[];
+    /** Information to aid in pagination. */
+    pageInfo: PageInfo;
+};
+export type AvailableGadgetInfoConnectionSelection = {
+    __typename?: boolean | null | undefined;
+    /** A list of edges. */
+    edges?: AvailableGadgetInfoEdgeSelection;
+    /** Information to aid in pagination. */
+    pageInfo?: AvailablePageInfoSelection;
+};
+/** An edge in a GadgetInfo connection. */
+export type GadgetInfoEdge = {
+    __typename: 'GadgetInfoEdge';
+    /** The item at the end of the edge */
+    node: GadgetInfo;
+    /** A cursor for use in pagination */
+    cursor: Scalars['String'];
+};
+export type AvailableGadgetInfoEdgeSelection = {
+    __typename?: boolean | null | undefined;
+    /** The item at the end of the edge */
+    node?: AvailableGadgetInfoSelection;
+    /** A cursor for use in pagination */
+    cursor?: boolean | null | undefined;
+};
 /** Represents one of the roles an identity in the system can be entitled to */
 export type GadgetRole = {
     __typename: 'GadgetRole';
@@ -4534,6 +4655,8 @@ export type InternalQueries = {
     listShopifySync: InternalShopifySyncRecordConnection;
     draftedProduct: (InternalDraftedProductRecord | null);
     listDraftedProduct: InternalDraftedProductRecordConnection;
+    gadgetInfo: (InternalGadgetInfoRecord | null);
+    listGadgetInfo: InternalGadgetInfoRecordConnection;
 };
 export type AvailableInternalQueriesSelection = {
     __typename?: boolean | null | undefined;
@@ -4563,6 +4686,8 @@ export type AvailableInternalQueriesSelection = {
     listShopifySync?: AvailableInternalShopifySyncRecordConnectionSelection;
     draftedProduct?: boolean | null | undefined;
     listDraftedProduct?: AvailableInternalDraftedProductRecordConnectionSelection;
+    gadgetInfo?: boolean | null | undefined;
+    listGadgetInfo?: AvailableInternalGadgetInfoRecordConnectionSelection;
 };
 /** A connection to a list of InternalSessionRecord items. */
 export type InternalSessionRecordConnection = {
@@ -4924,6 +5049,36 @@ export type AvailableInternalDraftedProductRecordEdgeSelection = {
     /** A cursor for use in pagination */
     cursor?: boolean | null | undefined;
 };
+/** A connection to a list of InternalGadgetInfoRecord items. */
+export type InternalGadgetInfoRecordConnection = {
+    __typename: 'InternalGadgetInfoRecordConnection';
+    /** A list of edges. */
+    edges: InternalGadgetInfoRecordEdge[];
+    /** Information to aid in pagination. */
+    pageInfo: PageInfo;
+};
+export type AvailableInternalGadgetInfoRecordConnectionSelection = {
+    __typename?: boolean | null | undefined;
+    /** A list of edges. */
+    edges?: AvailableInternalGadgetInfoRecordEdgeSelection;
+    /** Information to aid in pagination. */
+    pageInfo?: AvailablePageInfoSelection;
+};
+/** An edge in a InternalGadgetInfoRecord connection. */
+export type InternalGadgetInfoRecordEdge = {
+    __typename: 'InternalGadgetInfoRecordEdge';
+    /** The item at the end of the edge */
+    node: InternalGadgetInfoRecord;
+    /** A cursor for use in pagination */
+    cursor: Scalars['String'];
+};
+export type AvailableInternalGadgetInfoRecordEdgeSelection = {
+    __typename?: boolean | null | undefined;
+    /** The item at the end of the edge */
+    node?: boolean | null | undefined;
+    /** A cursor for use in pagination */
+    cursor?: boolean | null | undefined;
+};
 export type Mutation = {
     __typename: 'Mutation';
     abortShopifySync: (AbortShopifySyncResult | null);
@@ -4944,6 +5099,14 @@ export type Mutation = {
     bulkDeleteDraftedProducts: (BulkDeleteDraftedProductsResult | null);
     upsertDraftedProduct: (UpsertDraftedProductResult | null);
     bulkUpsertDraftedProducts: BulkUpsertDraftedProductsResult;
+    createGadgetInfo: (CreateGadgetInfoResult | null);
+    bulkCreateGadgetInfos: (BulkCreateGadgetInfosResult | null);
+    updateGadgetInfo: (UpdateGadgetInfoResult | null);
+    bulkUpdateGadgetInfos: (BulkUpdateGadgetInfosResult | null);
+    deleteGadgetInfo: (DeleteGadgetInfoResult | null);
+    bulkDeleteGadgetInfos: (BulkDeleteGadgetInfosResult | null);
+    upsertGadgetInfo: (UpsertGadgetInfoResult | null);
+    bulkUpsertGadgetInfos: BulkUpsertGadgetInfosResult;
     shopifyConnection: (ShopifyConnectionMutations | null);
     background: BackgroundMutations;
     internal: InternalMutations;
@@ -4971,6 +5134,14 @@ export type AvailableMutationSelection = {
     bulkDeleteDraftedProducts?: AvailableBulkDeleteDraftedProductsResultSelection;
     upsertDraftedProduct?: AvailableUpsertDraftedProductResultSelection;
     bulkUpsertDraftedProducts?: AvailableBulkUpsertDraftedProductsResultSelection;
+    createGadgetInfo?: AvailableCreateGadgetInfoResultSelection;
+    bulkCreateGadgetInfos?: AvailableBulkCreateGadgetInfosResultSelection;
+    updateGadgetInfo?: AvailableUpdateGadgetInfoResultSelection;
+    bulkUpdateGadgetInfos?: AvailableBulkUpdateGadgetInfosResultSelection;
+    deleteGadgetInfo?: AvailableDeleteGadgetInfoResultSelection;
+    bulkDeleteGadgetInfos?: AvailableBulkDeleteGadgetInfosResultSelection;
+    upsertGadgetInfo?: AvailableUpsertGadgetInfoResultSelection;
+    bulkUpsertGadgetInfos?: AvailableBulkUpsertGadgetInfosResultSelection;
     shopifyConnection?: AvailableShopifyConnectionMutationsSelection;
     background?: AvailableBackgroundMutationsSelection;
     internal?: AvailableInternalMutationsSelection;
@@ -5241,6 +5412,118 @@ export type AvailableBulkUpsertDraftedProductsResultSelection = {
     /** The results of each upsert action in the bulk operation */
     draftedProducts?: AvailableDraftedProductSelection;
 };
+export interface CreateGadgetInfoResult extends UpsertGadgetInfoResult {
+    __typename: 'CreateGadgetInfoResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+    actionRun: (Scalars['String'] | null);
+    gadgetInfo: (GadgetInfo | null);
+}
+export type AvailableCreateGadgetInfoResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+    actionRun?: boolean | null | undefined;
+    gadgetInfo?: AvailableGadgetInfoSelection;
+};
+/** The output when running the create on the gadgetInfo model in bulk. */
+export type BulkCreateGadgetInfosResult = {
+    __typename: 'BulkCreateGadgetInfosResult';
+    /** Boolean describing if all the bulk actions succeeded or not */
+    success: Scalars['Boolean'];
+    /** Aggregated list of errors that any bulk action encountered while processing */
+    errors: ExecutionError[];
+    /** The list of all changed gadgetInfo records by each sent bulk action. Returned in the same order as the input bulk action params. */
+    gadgetInfos: (GadgetInfo | null)[];
+};
+export type AvailableBulkCreateGadgetInfosResultSelection = {
+    __typename?: boolean | null | undefined;
+    /** Boolean describing if all the bulk actions succeeded or not */
+    success?: boolean | null | undefined;
+    /** Aggregated list of errors that any bulk action encountered while processing */
+    errors?: AvailableExecutionErrorSelection;
+    /** The list of all changed gadgetInfo records by each sent bulk action. Returned in the same order as the input bulk action params. */
+    gadgetInfos?: AvailableGadgetInfoSelection;
+};
+export interface UpdateGadgetInfoResult extends UpsertGadgetInfoResult {
+    __typename: 'UpdateGadgetInfoResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+    actionRun: (Scalars['String'] | null);
+    gadgetInfo: (GadgetInfo | null);
+}
+export type AvailableUpdateGadgetInfoResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+    actionRun?: boolean | null | undefined;
+    gadgetInfo?: AvailableGadgetInfoSelection;
+};
+/** The output when running the update on the gadgetInfo model in bulk. */
+export type BulkUpdateGadgetInfosResult = {
+    __typename: 'BulkUpdateGadgetInfosResult';
+    /** Boolean describing if all the bulk actions succeeded or not */
+    success: Scalars['Boolean'];
+    /** Aggregated list of errors that any bulk action encountered while processing */
+    errors: ExecutionError[];
+    /** The list of all changed gadgetInfo records by each sent bulk action. Returned in the same order as the input bulk action params. */
+    gadgetInfos: (GadgetInfo | null)[];
+};
+export type AvailableBulkUpdateGadgetInfosResultSelection = {
+    __typename?: boolean | null | undefined;
+    /** Boolean describing if all the bulk actions succeeded or not */
+    success?: boolean | null | undefined;
+    /** Aggregated list of errors that any bulk action encountered while processing */
+    errors?: AvailableExecutionErrorSelection;
+    /** The list of all changed gadgetInfo records by each sent bulk action. Returned in the same order as the input bulk action params. */
+    gadgetInfos?: AvailableGadgetInfoSelection;
+};
+export type DeleteGadgetInfoResult = {
+    __typename: 'DeleteGadgetInfoResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+    actionRun: (Scalars['String'] | null);
+};
+export type AvailableDeleteGadgetInfoResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+    actionRun?: boolean | null | undefined;
+};
+/** The output when running the delete on the gadgetInfo model in bulk. */
+export type BulkDeleteGadgetInfosResult = {
+    __typename: 'BulkDeleteGadgetInfosResult';
+    /** Boolean describing if all the bulk actions succeeded or not */
+    success: Scalars['Boolean'];
+    /** Aggregated list of errors that any bulk action encountered while processing */
+    errors: ExecutionError[];
+};
+export type AvailableBulkDeleteGadgetInfosResultSelection = {
+    __typename?: boolean | null | undefined;
+    /** Boolean describing if all the bulk actions succeeded or not */
+    success?: boolean | null | undefined;
+    /** Aggregated list of errors that any bulk action encountered while processing */
+    errors?: AvailableExecutionErrorSelection;
+};
+/** The result of a bulk upsert operation for the gadgetInfo model */
+export type BulkUpsertGadgetInfosResult = {
+    __typename: 'BulkUpsertGadgetInfosResult';
+    /** Boolean describing if all the bulk actions succeeded or not */
+    success: Scalars['Boolean'];
+    /** Aggregated list of errors that any bulk action encountered while processing */
+    errors: ExecutionError[];
+    /** The results of each upsert action in the bulk operation */
+    gadgetInfos: (GadgetInfo | null)[];
+};
+export type AvailableBulkUpsertGadgetInfosResultSelection = {
+    __typename?: boolean | null | undefined;
+    /** Boolean describing if all the bulk actions succeeded or not */
+    success?: boolean | null | undefined;
+    /** Aggregated list of errors that any bulk action encountered while processing */
+    errors?: AvailableExecutionErrorSelection;
+    /** The results of each upsert action in the bulk operation */
+    gadgetInfos?: AvailableGadgetInfoSelection;
+};
 export type ShopifyConnectionMutations = {
     __typename: 'ShopifyConnectionMutations';
     fetchOrInstallShop: (ShopifyConnectionFetchOrInstallShopResult | null);
@@ -5281,6 +5564,14 @@ export type BackgroundMutations = {
     bulkDeleteDraftedProducts: BulkEnqueueBackgroundActionResult;
     upsertDraftedProduct: EnqueueBackgroundActionResult;
     bulkUpsertDraftedProducts: BulkEnqueueBackgroundActionResult;
+    createGadgetInfo: EnqueueBackgroundActionResult;
+    bulkCreateGadgetInfos: BulkEnqueueBackgroundActionResult;
+    updateGadgetInfo: EnqueueBackgroundActionResult;
+    bulkUpdateGadgetInfos: BulkEnqueueBackgroundActionResult;
+    deleteGadgetInfo: EnqueueBackgroundActionResult;
+    bulkDeleteGadgetInfos: BulkEnqueueBackgroundActionResult;
+    upsertGadgetInfo: EnqueueBackgroundActionResult;
+    bulkUpsertGadgetInfos: BulkEnqueueBackgroundActionResult;
     inventory: BackgroundInventoryMutations;
     order: BackgroundOrderMutations;
     product: BackgroundProductMutations;
@@ -5305,6 +5596,14 @@ export type AvailableBackgroundMutationsSelection = {
     bulkDeleteDraftedProducts?: AvailableBulkEnqueueBackgroundActionResultSelection;
     upsertDraftedProduct?: AvailableEnqueueBackgroundActionResultSelection;
     bulkUpsertDraftedProducts?: AvailableBulkEnqueueBackgroundActionResultSelection;
+    createGadgetInfo?: AvailableEnqueueBackgroundActionResultSelection;
+    bulkCreateGadgetInfos?: AvailableBulkEnqueueBackgroundActionResultSelection;
+    updateGadgetInfo?: AvailableEnqueueBackgroundActionResultSelection;
+    bulkUpdateGadgetInfos?: AvailableBulkEnqueueBackgroundActionResultSelection;
+    deleteGadgetInfo?: AvailableEnqueueBackgroundActionResultSelection;
+    bulkDeleteGadgetInfos?: AvailableBulkEnqueueBackgroundActionResultSelection;
+    upsertGadgetInfo?: AvailableEnqueueBackgroundActionResultSelection;
+    bulkUpsertGadgetInfos?: AvailableBulkEnqueueBackgroundActionResultSelection;
     inventory?: AvailableBackgroundInventoryMutationsSelection;
     order?: AvailableBackgroundOrderMutationsSelection;
     product?: AvailableBackgroundProductMutationsSelection;
@@ -5489,6 +5788,15 @@ export type InternalMutations = {
     triggerCreateDraftedProduct: (CreateDraftedProductResult | null);
     triggerUpdateDraftedProduct: (UpdateDraftedProductResult | null);
     triggerDeleteDraftedProduct: (DeleteDraftedProductResult | null);
+    createGadgetInfo: (InternalCreateGadgetInfoResult | null);
+    updateGadgetInfo: (InternalUpdateGadgetInfoResult | null);
+    deleteGadgetInfo: (InternalDeleteGadgetInfoResult | null);
+    deleteManyGadgetInfo: (InternalDeleteManyGadgetInfoResult | null);
+    bulkCreateGadgetInfos: (InternalBulkCreateGadgetInfosResult | null);
+    upsertGadgetInfo: (InternalUpsertGadgetInfoResult | null);
+    triggerCreateGadgetInfo: (CreateGadgetInfoResult | null);
+    triggerUpdateGadgetInfo: (UpdateGadgetInfoResult | null);
+    triggerDeleteGadgetInfo: (DeleteGadgetInfoResult | null);
     inventory: InternalInventoryMutations;
     order: InternalOrderMutations;
     product: InternalProductMutations;
@@ -5606,6 +5914,15 @@ export type AvailableInternalMutationsSelection = {
     triggerCreateDraftedProduct?: AvailableCreateDraftedProductResultSelection;
     triggerUpdateDraftedProduct?: AvailableUpdateDraftedProductResultSelection;
     triggerDeleteDraftedProduct?: AvailableDeleteDraftedProductResultSelection;
+    createGadgetInfo?: AvailableInternalCreateGadgetInfoResultSelection;
+    updateGadgetInfo?: AvailableInternalUpdateGadgetInfoResultSelection;
+    deleteGadgetInfo?: AvailableInternalDeleteGadgetInfoResultSelection;
+    deleteManyGadgetInfo?: AvailableInternalDeleteManyGadgetInfoResultSelection;
+    bulkCreateGadgetInfos?: AvailableInternalBulkCreateGadgetInfosResultSelection;
+    upsertGadgetInfo?: AvailableInternalUpsertGadgetInfoResultSelection;
+    triggerCreateGadgetInfo?: AvailableCreateGadgetInfoResultSelection;
+    triggerUpdateGadgetInfo?: AvailableUpdateGadgetInfoResultSelection;
+    triggerDeleteGadgetInfo?: AvailableDeleteGadgetInfoResultSelection;
     inventory?: AvailableInternalInventoryMutationsSelection;
     order?: AvailableInternalOrderMutationsSelection;
     product?: AvailableInternalProductMutationsSelection;
@@ -6827,6 +7144,76 @@ export type AvailableInternalUpsertDraftedProductResultSelection = {
     success?: boolean | null | undefined;
     errors?: AvailableExecutionErrorSelection;
     draftedProduct?: boolean | null | undefined;
+};
+export type InternalCreateGadgetInfoResult = {
+    __typename: 'InternalCreateGadgetInfoResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+    gadgetInfo: (InternalGadgetInfoRecord | null);
+};
+export type AvailableInternalCreateGadgetInfoResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+    gadgetInfo?: boolean | null | undefined;
+};
+export type InternalUpdateGadgetInfoResult = {
+    __typename: 'InternalUpdateGadgetInfoResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+    gadgetInfo: (InternalGadgetInfoRecord | null);
+};
+export type AvailableInternalUpdateGadgetInfoResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+    gadgetInfo?: boolean | null | undefined;
+};
+export type InternalDeleteGadgetInfoResult = {
+    __typename: 'InternalDeleteGadgetInfoResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+    gadgetInfo: (InternalGadgetInfoRecord | null);
+};
+export type AvailableInternalDeleteGadgetInfoResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+    gadgetInfo?: boolean | null | undefined;
+};
+export type InternalDeleteManyGadgetInfoResult = {
+    __typename: 'InternalDeleteManyGadgetInfoResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+};
+export type AvailableInternalDeleteManyGadgetInfoResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+};
+export type InternalBulkCreateGadgetInfosResult = {
+    __typename: 'InternalBulkCreateGadgetInfosResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+    gadgetInfos: (InternalGadgetInfoRecord | null)[];
+};
+export type AvailableInternalBulkCreateGadgetInfosResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+    gadgetInfos?: boolean | null | undefined;
+};
+export type InternalUpsertGadgetInfoResult = {
+    __typename: 'InternalUpsertGadgetInfoResult';
+    success: Scalars['Boolean'];
+    errors: ExecutionError[];
+    gadgetInfo: (InternalGadgetInfoRecord | null);
+};
+export type AvailableInternalUpsertGadgetInfoResultSelection = {
+    __typename?: boolean | null | undefined;
+    success?: boolean | null | undefined;
+    errors?: AvailableExecutionErrorSelection;
+    gadgetInfo?: boolean | null | undefined;
 };
 export type InternalInventoryMutations = {
     __typename: 'InternalInventoryMutations';

@@ -15,6 +15,7 @@ import { ShopifyOrderManager } from "./models/ShopifyOrder.js";
 import { ShopifyOrderLineItemManager } from "./models/ShopifyOrderLineItem.js";
 import { ShopifySyncManager } from "./models/ShopifySync.js";
 import { DraftedProductManager } from "./models/DraftedProduct.js";
+import { GadgetInfoManager } from "./models/GadgetInfo.js";
 import { InventoryNamespace } from "./namespaces/inventory.js";
 import { OrderNamespace } from "./namespaces/order.js";
 import { ProductNamespace } from "./namespaces/product.js";
@@ -47,6 +48,8 @@ export type InternalModelManagers = {
     shopifySync: InternalModelManager;
     /** The internal API model manager for the draftedProduct model */
     draftedProduct: InternalModelManager;
+    /** The internal API model manager for the gadgetInfo model */
+    gadgetInfo: InternalModelManager;
     inventory: {};
     order: {};
     product: {};
@@ -70,6 +73,7 @@ export declare class Client implements AnyClient {
     shopifyOrderLineItem: ShopifyOrderLineItemManager;
     shopifySync: ShopifySyncManager;
     draftedProduct: DraftedProductManager;
+    gadgetInfo: GadgetInfoManager;
     inventory: InventoryNamespace;
     order: OrderNamespace;
     product: ProductNamespace;

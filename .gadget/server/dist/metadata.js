@@ -5079,6 +5079,77 @@ _export(exports, {
             "stateInActionCode": false,
             "childStates": []
         }
+    },
+    "GadgetInfo": {
+        "key": "yftmqXbNd7Cd",
+        "name": "gadgetInfo",
+        "apiIdentifier": "gadgetInfo",
+        "namespace": [],
+        "fields": {
+            "yftmqXbNd7Cd-system-id": {
+                "fieldType": "ID",
+                "key": "yftmqXbNd7Cd-system-id",
+                "name": "ID",
+                "apiIdentifier": "id",
+                "configuration": {
+                    "type": "IDConfig",
+                    "key": "tYOQC11I39Ps",
+                    "createdDate": "2024-10-23T05:04:55.484Z"
+                },
+                "internalWritable": true
+            },
+            "yftmqXbNd7Cd-system-createdAt": {
+                "fieldType": "DateTime",
+                "key": "yftmqXbNd7Cd-system-createdAt",
+                "name": "Created At",
+                "apiIdentifier": "createdAt",
+                "configuration": {
+                    "type": "DateTimeConfig",
+                    "key": "OJwd8KAFmr3W",
+                    "createdDate": "2024-10-23T05:04:55.486Z",
+                    "includeTime": true,
+                    "default": null
+                },
+                "internalWritable": true
+            },
+            "yftmqXbNd7Cd-system-updatedAt": {
+                "fieldType": "DateTime",
+                "key": "yftmqXbNd7Cd-system-updatedAt",
+                "name": "Updated At",
+                "apiIdentifier": "updatedAt",
+                "configuration": {
+                    "type": "DateTimeConfig",
+                    "key": "jd4d8pNLmoE3",
+                    "createdDate": "2024-10-23T05:04:55.487Z",
+                    "includeTime": true,
+                    "default": null
+                },
+                "internalWritable": true
+            },
+            "oqnUraFnh1gG": {
+                "fieldType": "String",
+                "key": "oqnUraFnh1gG",
+                "name": "syncStatus",
+                "apiIdentifier": "syncStatus",
+                "configuration": {
+                    "type": "StringConfig",
+                    "key": "6Cuner8kEwsU",
+                    "createdDate": "2024-10-23T05:05:11.074Z",
+                    "default": null
+                },
+                "internalWritable": true
+            }
+        },
+        "graphqlTypeName": "GadgetInfo",
+        "stateChart": {
+            "type": "StateChart",
+            "key": "mDSmk_FwOle7",
+            "createdDate": 1729659895487,
+            "actions": {},
+            "transitions": {},
+            "stateInActionCode": false,
+            "childStates": []
+        }
     }
 };
 /**
@@ -5096,5 +5167,6 @@ _export(exports, {
     "api:shopifyOrder": "ShopifyOrder",
     "api:shopifyOrderLineItem": "ShopifyOrderLineItem",
     "api:shopifySync": "ShopifySync",
-    "api:draftedProduct": "DraftedProduct"
+    "api:draftedProduct": "DraftedProduct",
+    "api:gadgetInfo": "GadgetInfo"
 };

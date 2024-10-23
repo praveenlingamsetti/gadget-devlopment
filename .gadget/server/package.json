@@ -43,7 +43,7 @@
   "gadget": {
     "applicationName": "i-was-a-sare-development",
     "environmentName": "Development",
-    "environmentVersion": "42"
+    "environmentVersion": "56"
   },
   "name": "gadget-server",
   "peerDependencies": {
@@ -53,5 +53,5 @@
   "private": true,
   "scripts": {},
   "types": "types/index.d.ts",
-  "version": "1.2.0-development.42"
+  "version": "1.2.0-development.56"
 }

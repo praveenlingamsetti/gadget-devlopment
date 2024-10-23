@@ -27,7 +27,7 @@ _export(exports, {
 *  |_|      \_/\_/ \__,_|___/      \__,_|     |___/\__,_|_|  \___|      \__,_|\___| \_/ \___|_|\___/| .__/|_| |_| |_|\___|_| |_|\__|
 *                                                                                                   |_|                             
 *
-* Built for environment `Development` at version 42
+* Built for environment `Development` at version 56
 * Framework version: ^1.3.0
 * Edit this app here: https://i-was-a-sare-development.gadget.dev/edit
 */ InvalidRecordError: function() {
@@ -122,6 +122,7 @@ _export_star(require("./models/ShopifyOrder"), exports);
 _export_star(require("./models/ShopifyOrderLineItem"), exports);
 _export_star(require("./models/ShopifySync"), exports);
 _export_star(require("./models/DraftedProduct"), exports);
+_export_star(require("./models/GadgetInfo"), exports);
 function _export_star(from, to) {
     Object.keys(from).forEach(function(k) {
         if (k !== "default" && !Object.prototype.hasOwnProperty.call(to, k)) {

@@ -68,6 +68,12 @@ import { UpdateDraftedProductActionContext } from "./models/DraftedProduct";
 
 import { DeleteDraftedProductActionContext } from "./models/DraftedProduct";
 
+import { CreateGadgetInfoActionContext } from "./models/GadgetInfo";
+
+import { UpdateGadgetInfoActionContext } from "./models/GadgetInfo";
+
+import { DeleteGadgetInfoActionContext } from "./models/GadgetInfo";
+
 import { InventoryUpdateInventoryToZeroGlobalActionContext } from "./global-actions";
 
 import { OrderReadOrderLineItemsGlobalActionContext } from "./global-actions";
@@ -284,6 +290,24 @@ declare module "../../../api/models/draftedProduct/actions/update" {
 declare module "../../../api/models/draftedProduct/actions/delete" {
   export type ActionRun = (params: DeleteDraftedProductActionContext) => Promise<any>;
   export type ActionOnSuccess = (params: DeleteDraftedProductActionContext) => Promise<any>;
+}
+
+// @ts-ignore 
+declare module "../../../api/models/gadgetInfo/actions/create" {
+  export type ActionRun = (params: CreateGadgetInfoActionContext) => Promise<any>;
+  export type ActionOnSuccess = (params: CreateGadgetInfoActionContext) => Promise<any>;
+}
+
+// @ts-ignore 
+declare module "../../../api/models/gadgetInfo/actions/update" {
+  export type ActionRun = (params: UpdateGadgetInfoActionContext) => Promise<any>;
+  export type ActionOnSuccess = (params: UpdateGadgetInfoActionContext) => Promise<any>;
+}
+
+// @ts-ignore 
+declare module "../../../api/models/gadgetInfo/actions/delete" {
+  export type ActionRun = (params: DeleteGadgetInfoActionContext) => Promise<any>;
+  export type ActionOnSuccess = (params: DeleteGadgetInfoActionContext) => Promise<any>;
 }
 
 // @ts-ignore 

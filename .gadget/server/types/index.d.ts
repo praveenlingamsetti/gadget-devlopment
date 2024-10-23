@@ -8,7 +8,7 @@
 *  |_|      \_/\_/ \__,_|___/      \__,_|     |___/\__,_|_|  \___|      \__,_|\___| \_/ \___|_|\___/| .__/|_| |_| |_|\___|_| |_|\__|
 *                                                                                                   |_|                             
 *
-* Built for environment `Development` at version 42
+* Built for environment `Development` at version 56
 * Framework version: ^1.3.0
 * Edit this app here: https://i-was-a-sare-development.gadget.dev/edit
 */ import type { Client } from "@gadget-client/i-was-a-sare-development";
@@ -49,6 +49,7 @@ export * from "./models/ShopifyOrder";
 export * from "./models/ShopifyOrderLineItem";
 export * from "./models/ShopifySync";
 export * from "./models/DraftedProduct";
+export * from "./models/GadgetInfo";
 /**
 * A map of connection name to instantiated connection objects for the app.
 */ declare let connections: AppConnections;

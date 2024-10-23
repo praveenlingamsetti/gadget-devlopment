@@ -18,6 +18,7 @@ import { ShopifyOrderManager } from "./models/ShopifyOrder.js";
 import { ShopifyOrderLineItemManager } from "./models/ShopifyOrderLineItem.js";
 import { ShopifySyncManager } from "./models/ShopifySync.js";
 import { DraftedProductManager } from "./models/DraftedProduct.js";
+import { GadgetInfoManager } from "./models/GadgetInfo.js";
 import { InventoryNamespace } from "./namespaces/inventory.js";
 import { OrderNamespace } from "./namespaces/order.js";
 import { ProductNamespace } from "./namespaces/product.js";
@@ -49,6 +50,8 @@ export type InternalModelManagers = {
    shopifySync: InternalModelManager;
    /** The internal API model manager for the draftedProduct model */
    draftedProduct: InternalModelManager;
+   /** The internal API model manager for the gadgetInfo model */
+   gadgetInfo: InternalModelManager;
    inventory: {
 
    };
@@ -94,6 +97,7 @@ export class Client implements AnyClient {
   shopifyOrderLineItem!: ShopifyOrderLineItemManager;
   shopifySync!: ShopifySyncManager;
   draftedProduct!: DraftedProductManager;
+  gadgetInfo!: GadgetInfoManager;
   inventory!: InventoryNamespace;
   order!: OrderNamespace;
   product!: ProductNamespace;
@@ -210,6 +214,7 @@ export class Client implements AnyClient {
     this.shopifyOrderLineItem = new ShopifyOrderLineItemManager(this.connection);
     this.shopifySync = new ShopifySyncManager(this.connection);
     this.draftedProduct = new DraftedProductManager(this.connection);
+    this.gadgetInfo = new GadgetInfoManager(this.connection);
     this.inventory = new InventoryNamespace(this);
     this.order = new OrderNamespace(this);
     this.product = new ProductNamespace(this);
@@ -227,6 +232,7 @@ export class Client implements AnyClient {
                       shopifyOrderLineItem: new InternalModelManager("shopifyOrderLineItem", this.connection, {"pluralApiIdentifier":"shopifyOrderLineItems","hasAmbiguousIdentifiers":false,"namespace":[]}),
                       shopifySync: new InternalModelManager("shopifySync", this.connection, {"pluralApiIdentifier":"shopifySyncs","hasAmbiguousIdentifiers":false,"namespace":[]}),
                       draftedProduct: new InternalModelManager("draftedProduct", this.connection, {"pluralApiIdentifier":"draftedProducts","hasAmbiguousIdentifiers":false,"namespace":[]}),
+                      gadgetInfo: new InternalModelManager("gadgetInfo", this.connection, {"pluralApiIdentifier":"gadgetInfos","hasAmbiguousIdentifiers":false,"namespace":[]}),
                       inventory: {
 
                       },
@@ -494,4 +500,4 @@ export class Client implements AnyClient {
   }
 }
 
-(Client.prototype as any)[Symbol.for("gadget/modelRelationships")] = {"session":{"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyShop":{"syncs":{"type":"HasMany","model":"shopifySync"},"orderLineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"locations":{"type":"HasMany","model":"shopifyLocation"},"orders":{"type":"HasMany","model":"shopifyOrder"},"products":{"type":"HasMany","model":"shopifyProduct"},"productVariants":{"type":"HasMany","model":"shopifyProductVariant"},"gdprRequests":{"type":"HasMany","model":"shopifyGdprRequest"},"inventoryItems":{"type":"HasMany","model":"shopifyInventoryItem"},"inventoryLevels":{"type":"HasMany","model":"shopifyInventoryLevel"},"primaryLocation":{"type":"BelongsTo","model":"shopifyLocation"}},"shopifyGdprRequest":{"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyProduct":{"orderLineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"variants":{"type":"HasMany","model":"shopifyProductVariant"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyProductVariant":{"orderLineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"inventoryItem":{"type":"BelongsTo","model":"shopifyInventoryItem"},"product":{"type":"BelongsTo","model":"shopifyProduct"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyInventoryItem":{"productVariant":{"type":"HasOne","model":"shopifyProductVariant"},"locations":{"type":"HasManyThrough","model":"shopifyLocation","through":"shopifyInventoryLevel"},"shopifyInventoryLevels":{"model":"shopifyInventoryLevel","type":"HasMany"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyLocation":{"orderLineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"orders":{"type":"HasMany","model":"shopifyOrder"},"inventoryItems":{"type":"HasManyThrough","model":"shopifyInventoryItem","through":"shopifyInventoryLevel"},"shopifyInventoryLevels":{"model":"shopifyInventoryLevel","type":"HasMany"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyInventoryLevel":{"inventoryItem":{"type":"BelongsTo","model":"shopifyInventoryItem"},"location":{"type":"BelongsTo","model":"shopifyLocation"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyOrder":{"lineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"retailLocation":{"type":"BelongsTo","model":"shopifyLocation"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyOrderLineItem":{"originLocation":{"type":"BelongsTo","model":"shopifyLocation"},"order":{"type":"BelongsTo","model":"shopifyOrder"},"product":{"type":"BelongsTo","model":"shopifyProduct"},"variant":{"type":"BelongsTo","model":"shopifyProductVariant"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifySync":{"shop":{"type":"BelongsTo","model":"shopifyShop"}},"draftedProduct":{}};
+(Client.prototype as any)[Symbol.for("gadget/modelRelationships")] = {"session":{"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyShop":{"syncs":{"type":"HasMany","model":"shopifySync"},"orderLineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"locations":{"type":"HasMany","model":"shopifyLocation"},"orders":{"type":"HasMany","model":"shopifyOrder"},"products":{"type":"HasMany","model":"shopifyProduct"},"productVariants":{"type":"HasMany","model":"shopifyProductVariant"},"gdprRequests":{"type":"HasMany","model":"shopifyGdprRequest"},"inventoryItems":{"type":"HasMany","model":"shopifyInventoryItem"},"inventoryLevels":{"type":"HasMany","model":"shopifyInventoryLevel"},"primaryLocation":{"type":"BelongsTo","model":"shopifyLocation"}},"shopifyGdprRequest":{"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyProduct":{"orderLineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"variants":{"type":"HasMany","model":"shopifyProductVariant"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyProductVariant":{"orderLineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"inventoryItem":{"type":"BelongsTo","model":"shopifyInventoryItem"},"product":{"type":"BelongsTo","model":"shopifyProduct"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyInventoryItem":{"productVariant":{"type":"HasOne","model":"shopifyProductVariant"},"locations":{"type":"HasManyThrough","model":"shopifyLocation","through":"shopifyInventoryLevel"},"shopifyInventoryLevels":{"model":"shopifyInventoryLevel","type":"HasMany"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyLocation":{"orderLineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"orders":{"type":"HasMany","model":"shopifyOrder"},"inventoryItems":{"type":"HasManyThrough","model":"shopifyInventoryItem","through":"shopifyInventoryLevel"},"shopifyInventoryLevels":{"model":"shopifyInventoryLevel","type":"HasMany"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyInventoryLevel":{"inventoryItem":{"type":"BelongsTo","model":"shopifyInventoryItem"},"location":{"type":"BelongsTo","model":"shopifyLocation"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyOrder":{"lineItems":{"type":"HasMany","model":"shopifyOrderLineItem"},"retailLocation":{"type":"BelongsTo","model":"shopifyLocation"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifyOrderLineItem":{"originLocation":{"type":"BelongsTo","model":"shopifyLocation"},"order":{"type":"BelongsTo","model":"shopifyOrder"},"product":{"type":"BelongsTo","model":"shopifyProduct"},"variant":{"type":"BelongsTo","model":"shopifyProductVariant"},"shop":{"type":"BelongsTo","model":"shopifyShop"}},"shopifySync":{"shop":{"type":"BelongsTo","model":"shopifyShop"}},"draftedProduct":{},"gadgetInfo":{}};
